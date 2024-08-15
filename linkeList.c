@@ -115,23 +115,24 @@ Node *aggiungiNodoLibero(int *numeroPosizione, int *numeroNumero) {
     }
 
     // ###############CODICE 2
-// Node *same = head;
-//    while (same != NULL && *numeroPosizione != 0)
-//    {
-//        (*numeroPosizione)--;
-//    }
-//    if (numeroPosizione != 0)
-//    {
-//        printf("NON TROVATO POSIZIONE NON DISPONIBILE");
-//        return NULL;
-//    }
-//    Node *new = malloc(sizeof(Node));
-//    if (new == NULL)
-//        return NULL;
-//    new->initData = *numeroNumero;
-//    new->next = same->next;
-//    same->next = new;
-//    return new;
+    // Node *same = head;
+    //    while (same != NULL && *numeroPosizione != 0)
+    //    {
+    //    same = same->next;
+    //        (*numeroPosizione)--;
+    //    }
+    //    if (numeroPosizione != 0)
+    //    {
+    //        printf("NON TROVATO POSIZIONE NON DISPONIBILE");
+    //        return NULL;
+    //    }
+    //    Node *new = malloc(sizeof(Node));
+    //    if (new == NULL)
+    //        return NULL;
+    //    new->initData = *numeroNumero;
+    //    new->next = same->next;
+    //    same->next = new;
+    //    return new;
 
 }
 
