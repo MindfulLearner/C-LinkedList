@@ -51,29 +51,47 @@ Node *aggiungiNodo(int *numero) {
     return contenitore;
 }
 
-// TOGLIERE
+// TOGLIERE Usiamo in rimuoviNodo int perche restituira return 1 che e fallimento o return 0 come fallimento
+// argomento usiamo numero pointer
 int rimuoviNodo(int *numero){
+    // faccio un contenitore per adress di memoria di head contenitore fornisce da attuale di adress
     Node *contenitore = head;
+    // prescendente iniziamo con head anche perche ora come ora, noi partiamo da inzio quidni non avremmo ancora qualcosa prima di haed
     Node *precedente = head;
+    // ora un while che fara la stessa cosa fino a quando contenitore non uguale a NULL diventera NULL perche alla fine non ci saranno piu nodi
     while (contenitore != NULL) {
-
+// controlliamo se il numero che abbiamo inserito equivale a initData che e' il valore all'interno del nodo
         if (contenitore->initData == *numero){
+            // if contnitere == head intendiamo se' il primo nodo che troviamo ed e' quello che dobbiamo togliere allora
             if (contenitore == head){
+                // indichiamo un nuovo indirizzo di memoria per head che sara il suo successivo
                 head = head->next;
+                //altrimenti
             }else{
-                precedente = contenitore->next;
+                // prescendete prendere next di contenitore attuale a cui stiamo puntando il suo next 
+                // quindi next = contenitore next attuale, in precendente mettiamo adress a qui verra collegata al prossimo di contenitore che ha head
+                precedente->next = contenitore->next;
+                // liberiamo la memoria 
+                free(contenitore);
+                // rendiamo contenitore NULL
+                contenitore = NULL;
             }
+            // ritorniamo 1 per fallimento
             return 1;
         }
+        // precendente prende le informazioni di contenitore quidni dati e next 
         precedente = contenitore;
+        // contenitore prende come valori quelli dell'indirizzo di memoria a cui e' next
         contenitore = contenitore->next;
     }
+    // ritornamo 0 per successo
     return 0;  
 }
 
 
 
 // INSERIAMO UNA POSIZIOEN DEL NODO
+//
 
 
 // STAMPARE
@@ -132,7 +150,9 @@ int main(int argc, char *argv[]){
                 case 2:
                     printf("\ttolgo \n");
                     // iniiziare remove :w
+                    // inseriamo un intero che verra passato a rimuoviNodo
                     scanf("%d", &datoPerInit);
+                    // usiamo int non nodo perchhe avremo un int che ritorna return  0 o 1 
                     int swag = rimuoviNodo(&datoPerInit);
                     printf("\n");
                     break;
