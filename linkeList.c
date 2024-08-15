@@ -50,7 +50,6 @@ Node *aggiungiNodo(int *numero) {
     }
     return contenitore;
 }
-
 // TOGLIERE Usiamo in rimuoviNodo int perche restituira return 1 che e fallimento o return 0 come fallimento
 // argomento usiamo numero pointer
 int rimuoviNodo(int *numero){
@@ -60,7 +59,7 @@ int rimuoviNodo(int *numero){
     Node *precedente = head;
     // ora un while che fara la stessa cosa fino a quando contenitore non uguale a NULL diventera NULL perche alla fine non ci saranno piu nodi
     while (contenitore != NULL) {
-// controlliamo se il numero che abbiamo inserito equivale a initData che e' il valore all'interno del nodo
+        // controlliamo se il numero che abbiamo inserito equivale a initData che e' il valore all'interno del nodo
         if (contenitore->initData == *numero){
             // if contnitere == head intendiamo se' il primo nodo che troviamo ed e' quello che dobbiamo togliere allora
             if (contenitore == head){
@@ -76,7 +75,7 @@ int rimuoviNodo(int *numero){
                 // rendiamo contenitore NULL
                 contenitore = NULL;
             }
-            // ritorniamo 1 per fallimento
+            // ritorniamo 1 per successo
             return 1;
         }
         // precendente prende le informazioni di contenitore quidni dati e next 
@@ -84,15 +83,57 @@ int rimuoviNodo(int *numero){
         // contenitore prende come valori quelli dell'indirizzo di memoria a cui e' next
         contenitore = contenitore->next;
     }
-    // ritornamo 0 per successo
+    // ritornamo 0 per  falliemnto
     return 0;  
 }
 
-
-
 // INSERIAMO UNA POSIZIOEN DEL NODO
-//
+Node *aggiungiNodoLibero(int *numeroPosizione, int *numeroNumero) {
+// ######################## CODICE 1 IDEA
+    Node *same = head;
+    Node *precedente = head;
+    Node *newNode = NULL;
+    newNode = malloc(sizeof(Node));
+    newNode->initData = *numeroNumero;
+    // if i type 2 i will iterate 2 times!! so . i type 1  it will go to first node
+    // DA sistemare!!! PROBLEM IN NUMERO POSIZIONE
+    if (*numeroPosizione == 1){
+        same = NULL;
+        (*numeroPosizione)--;
+        printf("per aggiungere a primo bisogna usare il comando add. nel menu!\n");
+    } 
+    while (same != NULL && numeroPosizione != 0) {
+        printf("swagger while Posizione: %d\n", *numeroPosizione);
+        (*numeroPosizione)--;
+        if (*numeroPosizione == 0) {
+            printf("swagger if Posizione: %d\n", *numeroPosizione);
+            precedente->next = newNode;
+            newNode->next = same;
+        }
+        precedente = same;
+        same = same->next;
+    }
 
+    // ###############CODICE 2
+// Node *same = head;
+//    while (same != NULL && *numeroPosizione != 0)
+//    {
+//        (*numeroPosizione)--;
+//    }
+//    if (numeroPosizione != 0)
+//    {
+//        printf("NON TROVATO POSIZIONE NON DISPONIBILE");
+//        return NULL;
+//    }
+//    Node *new = malloc(sizeof(Node));
+//    if (new == NULL)
+//        return NULL;
+//    new->initData = *numeroNumero;
+//    new->next = same->next;
+//    same->next = new;
+//    return new;
+
+}
 
 // STAMPARE
 void printList() {
@@ -107,9 +148,9 @@ void printList() {
         printf("%d linkato a -> ", attuale-> initData);
         //dato che in head e' contenuto anche indirizzo di memoria di quello su ccessivo attuale prendere il prossimo indirizzo di memoria
         attuale = attuale->next;
-        // ricomincia il ciclo fino a quando attuale non si trovera in un indirizzo NULL
-    }
-}
+                    // ricomincia il ciclo fino a quando attuale non si trovera in un indirizzo NULL
+                }
+                }
 
 // USCIRE DAL GIOCO
 
@@ -154,10 +195,24 @@ int main(int argc, char *argv[]){
                     scanf("%d", &datoPerInit);
                     // usiamo int non nodo perchhe avremo un int che ritorna return  0 o 1 
                     int swag = rimuoviNodo(&datoPerInit);
+                    // return 1 success, return 0 not succes
+                    if (!swag){ 
+                        printf("e' stato un fallimento. Non esiste nella lista il numero: %d\n", datoPerInit); 
+                    } else {
+                        printf("e' stato rimossso correttamente il numero: %d\n", datoPerInit);
+                    }
                     printf("\n");
                     break;
                 case 3:
+                    // uso 2 numeri di inserimento: 1 per la posizione e uno per il numero che si vuole inserire:w
+                    // 
                     printf("\tinserimento\n");
+                    printf("inserimento numero della posizione: \n");
+                    int numberPosition;
+                    scanf("%d", &numberPosition);
+                    printf("Inserisci numero che vuole inserire nella lista\n");
+                    scanf("%d", &datoPerInit);
+                    contenitore = aggiungiNodoLibero(&numberPosition, &datoPerInit);
                     printf("\n");
                     break;
                 case 4:
